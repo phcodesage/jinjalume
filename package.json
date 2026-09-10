@@ -1,0 +1,13 @@
+{
+  "name": "jinjalume-demo-assets",
+  "private": true,
+  "description": "Development-only Tailwind assets for Jinjalume",
+  "scripts": {
+    "build:css": "tailwindcss -i ./static/src/input.css -o ./demo/static/dist/jinjalume.css --minify",
+    "dev:css": "tailwindcss -i ./static/src/input.css -o ./demo/static/dist/jinjalume.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.0",
+    "tailwindcss": "^4.3.0"
+  }
+}

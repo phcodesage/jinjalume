@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Jinjalume{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/jinjalume.css') }}">
+  </head>
+  <body class="min-h-screen bg-slate-50 text-slate-900 antialiased">
+    <main class="mx-auto max-w-5xl px-6 py-16 lg:px-8">
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>

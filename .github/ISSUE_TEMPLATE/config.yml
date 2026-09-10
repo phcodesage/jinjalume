@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Usage questions and ideas
+    url: https://github.com/phcodesage/jinjalume/discussions
+    about: Ask questions and share ideas with the community.

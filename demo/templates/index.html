@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% from "jinjalume/components/alert.html" import alert %}
+{% from "jinjalume/components/badge.html" import badge %}
+{% from "jinjalume/components/button.html" import button %}
+{% from "jinjalume/components/card.html" import card %}
+{% from "jinjalume/components/input.html" import input_field %}
+
+{% block title %}Jinjalume MVP{% endblock %}
+
+{% block content %}
+  <div class="max-w-2xl">
+    <div class="flex items-center gap-3">
+      {{ badge("MVP", variant="success") }}
+      <span class="text-sm text-slate-500">Jinja + Tailwind + Flask</span>
+    </div>
+    <h1 class="mt-6 text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">Jinjalume</h1>
+    <p class="mt-5 text-lg leading-8 text-slate-600">Reusable, server-rendered UI components for Python web apps.</p>
+  </div>
+
+  <div class="mt-10">
+    {{ alert("The first Jinjalume components are ready for feedback and contribution.", title="Welcome to the MVP", variant="info") }}
+  </div>
+
+  <div class="mt-10 grid gap-6 md:grid-cols-2">
+    {% call card("Buttons", "Small, composable actions with sensible defaults.") %}
+      <div class="flex flex-wrap gap-3">
+        {{ button("Primary") }}
+        {{ button("Secondary", variant="secondary") }}
+        {{ button("Delete", variant="danger") }}
+      </div>
+    {% endcall %}
+
+    {% call card("Form input", "A baseline input with help and error states.") %}
+      {{ input_field("email", label="Email address", placeholder="you@example.com", help_text="We will never share your email.", required=True) }}
+    {% endcall %}
+  </div>
+{% endblock %}

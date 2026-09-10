@@ -1,0 +1,22 @@
+{% macro input_field(name, label=None, value="", type="text", placeholder="", help_text=None, error=None, required=False, class_name="") -%}
+  <div class="space-y-2 {{ class_name }}">
+    {% if label %}
+      <label for="{{ name }}" class="block text-sm font-medium text-slate-900">{{ label }}{% if required %} <span aria-hidden="true">*</span>{% endif %}</label>
+    {% endif %}
+    <input
+      id="{{ name }}"
+      name="{{ name }}"
+      type="{{ type }}"
+      value="{{ value }}"
+      {% if placeholder %}placeholder="{{ placeholder }}"{% endif %}
+      {% if required %}required{% endif %}
+      {% if error %}aria-invalid="true" aria-describedby="{{ name }}-error"{% endif %}
+      class="block w-full rounded-lg border-0 px-3 py-2.5 text-sm text-slate-900 shadow-sm ring-1 ring-inset {% if error %}ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-red-600{% else %}ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-slate-900{% endif %}"
+    >
+    {% if error %}
+      <p id="{{ name }}-error" class="text-sm text-red-600">{{ error }}</p>
+    {% elif help_text %}
+      <p class="text-sm text-slate-500">{{ help_text }}</p>
+    {% endif %}
+  </div>
+{%- endmacro %}

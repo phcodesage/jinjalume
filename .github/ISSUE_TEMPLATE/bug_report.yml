@@ -1,0 +1,30 @@
+name: Bug report
+description: Report a reproducible problem with Jinjalume
+title: "bug: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve Jinjalume. Please remove secrets and private data from examples.
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      description: Describe the expected and actual behavior.
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Include Python, Flask, Jinjalume, and browser versions when relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Link to a repository or paste the smallest example that reproduces the issue.
+    validations:
+      required: true
