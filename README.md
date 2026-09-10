@@ -30,6 +30,27 @@ Open <http://127.0.0.1:5000>.
 
 Browse the component gallery at <https://phcodesage.github.io/jinjalume/>.
 
+## PyPI release
+
+Releases are published from GitHub Actions when a version tag such as `v0.1.0` is pushed. The workflow builds and validates both the source distribution and wheel, then publishes them through PyPI Trusted Publishing.
+
+Before the first release, the project maintainer must add a pending publisher at <https://pypi.org/manage/account/publishing/> with:
+
+- PyPI project name: `jinjalume`
+- GitHub owner: `phcodesage`
+- GitHub repository: `jinjalume`
+- Workflow name: `release.yml`
+- GitHub environment: `pypi`
+
+After that one-time setup, create a GitHub release or push a tag:
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+```
+
+The first successful publish creates the PyPI project at <https://pypi.org/project/jinjalume/>.
+
 ## Use in a Flask app
 
 ```python

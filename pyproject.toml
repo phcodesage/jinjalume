@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=69"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -8,7 +8,8 @@ version = "0.1.0"
 description = "Server-rendered Tailwind UI components for Flask and Jinja applications"
 readme = "README.md"
 requires-python = ">=3.9"
-license = { file = "LICENSE" }
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [
   { name = "Jinjalume contributors" },
 ]
@@ -16,7 +17,6 @@ classifiers = [
   "Development Status :: 3 - Alpha",
   "Framework :: Flask",
   "Intended Audience :: Developers",
-  "License :: OSI Approved :: MIT License",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
   "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
@@ -32,7 +32,7 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/phcodesage/jinjalume"
+Homepage = "https://phcodesage.github.io/jinjalume/"
 Issues = "https://github.com/phcodesage/jinjalume/issues"
 Source = "https://github.com/phcodesage/jinjalume"
 
