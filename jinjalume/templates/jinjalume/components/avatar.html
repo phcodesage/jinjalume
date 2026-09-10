@@ -1,0 +1,13 @@
+{% macro avatar(name, src=None, size="md", class_name="") -%}
+  {% set sizes = {
+    "sm": "h-8 w-8 text-xs",
+    "md": "h-10 w-10 text-sm",
+    "lg": "h-14 w-14 text-lg"
+  } %}
+  {% set classes = "inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-violet-100 font-semibold text-violet-700 ring-2 ring-white " ~ sizes.get(size, sizes["md"]) ~ " " ~ class_name %}
+  {% if src %}
+    <img src="{{ src }}" alt="{{ name }}" class="{{ classes }}">
+  {% else %}
+    <span role="img" aria-label="{{ name }}" class="{{ classes }}">{{ name|trim|first|upper }}</span>
+  {% endif %}
+{%- endmacro %}

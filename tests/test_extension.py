@@ -31,3 +31,28 @@ def test_extension_preserves_application_templates(tmp_path):
         rendered = render_template_string('{% include "custom.html" %}')
 
     assert rendered == "Custom template"
+
+
+def test_extended_components_render():
+    app = Flask(__name__)
+    Jinjalume(app)
+
+    template = """
+    {% from "jinjalume/components/avatar.html" import avatar %}
+    {% from "jinjalume/components/modal.html" import modal %}
+    {% from "jinjalume/components/spinner.html" import spinner %}
+    {% from "jinjalume/components/textarea.html" import textarea_field %}
+    {{ avatar("Jinjalume") }}
+    {{ spinner("Saving") }}
+    {{ textarea_field("message", label="Message", required=True) }}
+    {% call modal("example", "Example dialog") %}Dialog content{% endcall %}
+    """
+
+    with app.app_context():
+        rendered = render_template_string(template)
+
+    assert 'aria-label="Jinjalume"' in rendered
+    assert 'aria-label="Saving"' in rendered
+    assert 'id="message"' in rendered
+    assert 'id="example"' in rendered
+    assert "Dialog content" in rendered

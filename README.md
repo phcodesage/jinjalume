@@ -9,7 +9,7 @@ Jinjalume is an open-source, HTML-first component kit for developers who want re
 ## What is included
 
 - A small Flask extension that makes Jinjalume templates available to your app
-- Reusable Jinja macros for buttons, badges, alerts, cards, and form inputs
+- Reusable Jinja macros for buttons, badges, alerts, cards, inputs, textareas, avatars, spinners, and dialogs
 - Tailwind CSS v4 build setup
 - A working Flask demo
 - Contributor documentation, issue templates, and continuous integration
@@ -27,6 +27,8 @@ flask --app demo.app run --debug
 ```
 
 Open <http://127.0.0.1:5000>.
+
+Browse the component gallery at <https://phcodesage.github.io/jinjalume/>.
 
 ## Use in a Flask app
 
@@ -48,6 +50,21 @@ Then import a component in a Jinja template:
 ```
 
 The extension only registers Jinjalume's templates. Your application remains responsible for building and serving its Tailwind CSS file.
+
+## Available components
+
+Import the macros you need from `jinjalume/components/`:
+
+- `button.html` — primary, secondary, and danger actions
+- `badge.html` — compact status labels
+- `alert.html` — informational, success, warning, and danger messages
+- `card.html` — content containers with a caller block
+- `input.html` and `textarea.html` — labeled fields with help and error states
+- `avatar.html` — image or initials avatar
+- `spinner.html` — accessible loading indicator
+- `modal.html` — native HTML dialog markup for progressive enhancement
+
+All components are plain Jinja macros. They do not require a JavaScript framework, and interactive behavior can be progressively enhanced with native browser APIs, HTMX, or Alpine.js.
 
 ## Development
 
