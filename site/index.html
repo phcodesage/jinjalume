@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Jinjalume is an open-source Tailwind UI kit for Flask, Jinja, and Python web apps.">
+    <meta name="theme-color" content="#f7f4ed">
+    <meta property="og:title" content="Jinjalume — UI for Python apps">
+    <meta property="og:description" content="Server-rendered Tailwind UI components and application blocks for Flask, Jinja, and Python web apps.">
+    <meta property="og:url" content="https://phcodesage.github.io/jinjalume/">
+    <title>Jinjalume — UI for Python apps</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: { sans: ["Inter", "Arial", "Helvetica", "sans-serif"] },
+            colors: { ink: "#111116", paper: "#f7f4ed", violet: "#7759ee", lime: "#d7ff63", lilac: "#d9d0ff" },
+            boxShadow: { lift: "10px 12px 0 rgba(17, 17, 22, .95)", soft: "0 16px 50px rgba(17, 17, 22, .10)" }
+          }
+        }
+      };
+    </script>
+    <link rel="stylesheet" href="site.css">
+    <script src="site.js" defer></script>
+  </head>
+
+  <body class="overflow-x-hidden bg-paper font-sans text-ink">
+    <div class="pointer-events-none fixed inset-0 z-50 opacity-[.035] noise" aria-hidden="true"></div>
+
+    <header class="absolute inset-x-0 top-0 z-40 px-5 py-5 md:px-10 md:py-7">
+      <nav class="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-ink/10 bg-paper/80 px-4 py-3 backdrop-blur-xl md:px-5" aria-label="Main navigation">
+        <a href="#top" class="group flex items-center gap-3" aria-label="Jinjalume home">
+          <span class="logo-mark" aria-hidden="true"><span>J</span></span>
+          <span class="text-base font-semibold tracking-[-.05em] md:text-lg">Jinjalume</span>
+        </a>
+        <div class="hidden items-center gap-1 md:flex">
+          <a href="#blocks" class="rounded-full px-4 py-2 text-sm font-medium text-ink/60 transition hover:bg-ink/5 hover:text-ink">UI blocks</a>
+          <a href="#components" class="rounded-full px-4 py-2 text-sm font-medium text-ink/60 transition hover:bg-ink/5 hover:text-ink">Components</a>
+          <a href="#principles" class="rounded-full px-4 py-2 text-sm font-medium text-ink/60 transition hover:bg-ink/5 hover:text-ink">Why Jinjalume</a>
+          <a href="#contribute" class="rounded-full px-4 py-2 text-sm font-medium text-ink/60 transition hover:bg-ink/5 hover:text-ink">Contribute</a>
+          <a href="https://github.com/phcodesage/jinjalume" class="rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-violet" target="_blank" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+        <button type="button" data-menu-toggle class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-ink text-lg text-white md:hidden" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation">☰</button>
+      </nav>
+      <div id="mobile-menu" data-mobile-menu class="mx-auto mt-2 hidden max-w-7xl rounded-3xl border border-ink/10 bg-white p-3 shadow-soft md:hidden">
+        <a href="#blocks" class="block rounded-2xl px-4 py-3 text-base font-semibold">UI blocks</a>
+        <a href="#components" class="block rounded-2xl px-4 py-3 text-base font-semibold">Components</a>
+        <a href="#principles" class="block rounded-2xl px-4 py-3 text-base font-semibold">Why Jinjalume</a>
+        <a href="#contribute" class="block rounded-2xl px-4 py-3 text-base font-semibold">Contribute</a>
+        <a href="https://github.com/phcodesage/jinjalume" class="block rounded-2xl bg-violet px-4 py-3 text-base font-semibold text-white" target="_blank" rel="noreferrer">View on GitHub ↗</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="relative overflow-hidden px-5 pb-24 pt-36 md:px-10 md:pb-36 md:pt-52">
+        <div class="absolute -right-32 -top-32 h-[34rem] w-[34rem] rounded-full bg-violet/15 blur-3xl" aria-hidden="true"></div>
+        <div class="absolute -bottom-48 left-1/3 h-96 w-96 rounded-full bg-lime/35 blur-3xl" aria-hidden="true"></div>
+        <div class="relative mx-auto grid max-w-7xl items-end gap-16 lg:grid-cols-[1.04fr_.96fr] lg:gap-24">
+          <div>
+            <div class="mb-8 flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[.18em] text-ink/55" data-reveal>
+              <span class="rounded-full border border-ink/15 px-3 py-1.5">Open source · MIT</span>
+              <span class="rounded-full border border-ink/15 px-3 py-1.5">Flask + Jinja</span>
+              <span class="rounded-full border border-ink/15 px-3 py-1.5">Tailwind CSS</span>
+              <span class="rounded-full border border-ink/15 bg-lime px-3 py-1.5 text-ink">Auth + dashboard blocks</span>
+            </div>
+            <p class="mb-7 text-sm font-medium text-violet" data-reveal>// the missing UI layer for Python’s server-rendered web</p>
+            <h1 class="max-w-4xl text-[clamp(3.7rem,8vw,8rem)] font-medium leading-[.88] tracking-[-.09em]" data-reveal>
+              UI that speaks<br>
+              <span class="inline-block bg-violet px-2 text-white">Jinja.</span>
+            </h1>
+            <p class="mt-9 max-w-2xl text-lg leading-8 text-ink/65 md:text-xl md:leading-9" data-reveal data-delay="1">Reusable Tailwind components and complete application blocks for Flask and Python apps that render HTML on purpose. No SPA migration. No component compiler. Just clean macros you can drop into a template.</p>
+            <div class="mt-9 flex flex-wrap gap-3" data-reveal data-delay="2">
+              <a href="#blocks" class="rounded-full bg-ink px-6 py-3.5 text-base font-semibold text-white transition duration-300 hover:-translate-y-1 hover:bg-violet">Explore UI blocks <span aria-hidden="true">↓</span></a>
+              <a href="https://github.com/phcodesage/jinjalume" class="rounded-full border border-ink/20 bg-white/60 px-6 py-3.5 text-base font-semibold transition duration-300 hover:-translate-y-1 hover:border-ink" target="_blank" rel="noreferrer">Read the source <span aria-hidden="true">↗</span></a>
+            </div>
+            <div class="mt-5 flex flex-wrap items-center gap-3" data-reveal data-delay="2">
+              <div class="flex items-center gap-3 rounded-2xl bg-ink px-4 py-3 text-sm text-white shadow-[0_4px_0_rgba(119,89,238,.85)]">
+                <span class="text-lime" aria-hidden="true">$</span><code id="pip-install-snippet" class="font-sans">pip install jinjalume</code>
+                <button type="button" data-copy="pip-install-snippet" class="rounded-lg border border-white/20 px-2.5 py-1.5 text-xs font-semibold text-white transition hover:border-lime hover:text-lime">Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative" data-reveal data-delay="2">
+            <div class="absolute -inset-4 rotate-3 rounded-[2rem] bg-lime"></div>
+            <div class="relative overflow-hidden rounded-[1.75rem] border border-ink/15 bg-[#19191f] shadow-lift">
+              <div class="flex items-center justify-between border-b border-white/10 px-5 py-4 text-xs text-white/45"><span>login.html</span><span class="flex gap-1.5" aria-hidden="true"><i class="h-2.5 w-2.5 rounded-full bg-red-400"></i><i class="h-2.5 w-2.5 rounded-full bg-amber-300"></i><i class="h-2.5 w-2.5 rounded-full bg-emerald-400"></i></span></div>
+              <div class="hero-login-grid bg-[#f7f4ed] p-5 sm:p-8">
+                <div class="rounded-2xl bg-white p-5 shadow-soft sm:p-7">
+                  <p class="text-[10px] font-bold uppercase tracking-[.18em] text-violet">Sign in</p>
+                  <h2 class="mt-3 text-2xl font-bold tracking-[-.05em]">Welcome back</h2>
+                  <p class="mt-2 text-xs leading-5 text-ink/55">Sign in to continue to your workspace.</p>
+                  <div class="mt-6 space-y-3"><div><p class="mb-1.5 text-[10px] font-semibold">Email address</p><div class="h-9 rounded-lg border border-ink/10 bg-paper"></div></div><div><p class="mb-1.5 text-[10px] font-semibold">Password</p><div class="h-9 rounded-lg border border-ink/10 bg-paper"></div></div></div>
+                  <div class="mt-5 h-9 rounded-lg bg-ink text-center text-xs font-semibold leading-9 text-white">Sign in</div>
+                  <p class="mt-4 text-center text-[10px] text-ink/50">New here? <span class="font-semibold text-violet">Create an account</span></p>
+                </div>
+              </div>
+              <div class="flex items-center justify-between gap-4 border-t border-white/10 bg-white/[.04] px-5 py-4 text-xs text-white/45"><span>server-rendered by default</span><span class="text-lime">auth block preview</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="border-y border-ink/15 bg-white px-5 py-10 md:px-10">
+        <div class="mx-auto grid max-w-7xl grid-cols-2 gap-8 sm:grid-cols-4">
+          <div><p class="text-4xl font-semibold tracking-[-.08em]">12</p><p class="mt-2 text-sm text-ink/55">visual test cases</p></div>
+          <div><p class="text-4xl font-semibold tracking-[-.08em]">10</p><p class="mt-2 text-sm text-ink/55">starter components</p></div>
+          <div><p class="text-4xl font-semibold tracking-[-.08em]">3</p><p class="mt-2 text-sm text-ink/55">application blocks</p></div>
+          <div><p class="text-4xl font-semibold tracking-[-.08em]">0</p><p class="mt-2 text-sm text-ink/55">frontend frameworks</p></div>
+        </div>
+      </section>
+
+      <section id="blocks" class="border-b border-ink/15 bg-[#eeebff] px-5 py-28 md:px-10 md:py-36">
+        <div class="mx-auto max-w-7xl">
+          <div class="max-w-3xl" data-reveal><p class="text-sm font-semibold uppercase tracking-[.18em] text-violet">Composition blocks</p><h2 class="mt-5 text-5xl font-medium leading-[.95] tracking-[-.08em] md:text-7xl">From primitives to product screens.</h2><p class="mt-7 max-w-2xl text-lg leading-8 text-ink/65">Start with a form, ship with a flow. These ready-made blocks show how Jinjalume components become useful application surfaces without adding a JavaScript framework.</p></div>
+          <div class="mt-16 grid gap-6 lg:grid-cols-3">
+            <article id="login-block" class="component-card block-card" data-reveal>
+              <div class="component-card-head"><span>Authentication</span><code>auth.html</code></div>
+              <div class="ui-preview bg-[#f7f4ed] p-5"><div class="mx-auto max-w-xs rounded-2xl bg-white p-5 shadow-soft"><p class="text-[10px] font-bold uppercase tracking-[.18em] text-violet">Sign in</p><h3 class="mt-2 text-xl font-bold tracking-[-.05em]">Welcome back</h3><p class="mt-1 text-[11px] text-ink/55">Continue to your workspace.</p><div class="mt-5 space-y-3"><div class="mini-field"><span>Email address</span></div><div class="mini-field"><span>Password</span></div></div><div class="mt-4 rounded-lg bg-ink py-2 text-center text-[11px] font-semibold text-white">Sign in</div><p class="mt-4 text-center text-[10px] text-ink/50">Forgot password?</p></div></div>
+              <div class="component-card-foot"><span>login form · validation-ready</span><a href="https://github.com/phcodesage/jinjalume/blob/main/docs/blocks.md#login-and-signup-forms" class="font-semibold text-violet" target="_blank" rel="noreferrer">Inspect ↗</a></div>
+            </article>
+
+            <article id="signup-block" class="component-card block-card" data-reveal data-delay="1">
+              <div class="component-card-head"><span>Authentication</span><code>auth.html</code></div>
+              <div class="ui-preview bg-white p-5"><div class="mx-auto max-w-xs rounded-2xl border border-ink/10 bg-paper p-5"><p class="text-[10px] font-bold uppercase tracking-[.18em] text-violet">Get started</p><h3 class="mt-2 text-xl font-bold tracking-[-.05em]">Create your account</h3><div class="mt-5 space-y-3"><div class="mini-field"><span>Full name</span></div><div class="mini-field"><span>Email address</span></div><div class="mini-field"><span>Password</span></div></div><div class="mt-4 flex items-start gap-2 text-[10px] text-ink/55"><span class="mt-0.5 h-3 w-3 rounded border border-ink/20 bg-white"></span><span>I agree to the <b class="text-violet">terms and conditions.</b></span></div><div class="mt-4 rounded-lg bg-ink py-2 text-center text-[11px] font-semibold text-white">Create account</div></div></div>
+              <div class="component-card-foot"><span>signup form · consent state</span><a href="https://github.com/phcodesage/jinjalume/blob/main/docs/blocks.md#login-and-signup-forms" class="font-semibold text-violet" target="_blank" rel="noreferrer">Inspect ↗</a></div>
+            </article>
+
+            <article id="admin-block" class="component-card block-card" data-reveal data-delay="2">
+              <div class="component-card-head"><span>Operations</span><code>dashboard.html</code></div>
+              <div class="ui-preview bg-paper p-4"><div class="mini-dashboard"><div class="mini-sidebar"><span class="mini-logo">J</span><span class="mini-nav active">Overview</span><span class="mini-nav">Customers</span><span class="mini-nav">Orders</span><span class="mini-nav">Analytics</span></div><div class="min-w-0 flex-1 p-4"><div class="flex items-center justify-between"><div><p class="text-[9px] uppercase tracking-[.15em] text-ink/45">Workspace</p><p class="text-sm font-bold">Overview</p></div><span class="mini-avatar">A</span></div><div class="mt-5 grid grid-cols-2 gap-2"><div class="mini-stat"><span>Revenue</span><b>$48k</b></div><div class="mini-stat"><span>Customers</span><b>2,431</b></div></div><div class="mt-3 rounded-xl bg-white p-3"><p class="text-[10px] font-bold">Recent orders</p><div class="mt-3 space-y-2"><div class="mini-row"><span>Olivia Martin</span><b>$1,240</b></div><div class="mini-row"><span>Phoenix Baker</span><b>$860</b></div><div class="mini-row"><span>Lana Byrd</span><b>$540</b></div></div></div></div></div></div>
+              <div class="component-card-foot"><span>sidebar · KPI cards · table</span><a href="https://github.com/phcodesage/jinjalume/blob/main/docs/blocks.md#dashboard-shell" class="font-semibold text-violet" target="_blank" rel="noreferrer">Inspect ↗</a></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="components" class="bg-white px-5 py-28 md:px-10 md:py-36">
+        <div class="mx-auto max-w-7xl">
+          <div class="flex flex-wrap items-end justify-between gap-6" data-reveal><div><p class="text-sm font-semibold uppercase tracking-[.18em] text-violet">The building blocks</p><h2 class="mt-5 text-5xl font-medium leading-[.95] tracking-[-.08em] md:text-7xl">Small pieces.<br>Serious range.</h2></div><a href="https://github.com/phcodesage/jinjalume/tree/main/jinjalume/templates/jinjalume" class="text-sm font-semibold text-ink underline decoration-violet decoration-2 underline-offset-4" target="_blank" rel="noreferrer">Inspect every macro ↗</a></div>
+          <div class="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <article class="component-card p-6" data-reveal><span class="inline-flex rounded-full bg-lime px-3 py-1 text-xs font-semibold">button.html</span><h3 class="mt-8 text-2xl font-semibold tracking-[-.06em]">Actions with intent.</h3><div class="mt-8 flex gap-2"><span class="rounded-lg bg-ink px-3 py-2 text-xs font-semibold text-white">Primary</span><span class="rounded-lg border border-ink/15 px-3 py-2 text-xs font-semibold">Cancel</span></div></article>
+            <article class="component-card p-6" data-reveal data-delay="1"><span class="inline-flex rounded-full bg-lilac px-3 py-1 text-xs font-semibold">input.html</span><h3 class="mt-8 text-2xl font-semibold tracking-[-.06em]">Fields that explain themselves.</h3><div class="mt-8"><p class="mb-2 text-xs font-semibold">Email address</p><div class="h-10 rounded-lg border border-ink/15 bg-paper"></div><p class="mt-2 text-[11px] text-ink/50">Help text and errors stay linked.</p></div></article>
+            <article class="component-card p-6" data-reveal data-delay="2"><span class="inline-flex rounded-full bg-violet px-3 py-1 text-xs font-semibold text-white">alert.html</span><h3 class="mt-8 text-2xl font-semibold tracking-[-.06em]">Feedback that earns attention.</h3><div class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-xs font-semibold text-emerald-800">Your changes were saved.</div></article>
+            <article class="component-card p-6" data-reveal><span class="inline-flex rounded-full bg-ink px-3 py-1 text-xs font-semibold text-white">modal.html</span><h3 class="mt-8 text-2xl font-semibold tracking-[-.06em]">Native interaction.</h3><div class="mt-8 rounded-xl border border-ink/10 bg-paper p-4"><div class="flex items-center justify-between"><span class="text-xs font-semibold">Confirm changes</span><span aria-hidden="true">×</span></div><div class="mt-4 h-2 w-3/4 rounded bg-ink/10"></div><div class="mt-2 h-2 w-1/2 rounded bg-ink/10"></div></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="principles" class="px-5 py-28 md:px-10 md:py-36"><div class="mx-auto grid max-w-7xl gap-16 lg:grid-cols-[.9fr_1.1fr] lg:gap-28"><div data-reveal><p class="text-sm font-semibold uppercase tracking-[.18em] text-violet">Why Jinjalume</p><h2 class="mt-5 text-5xl font-medium leading-[.95] tracking-[-.08em] md:text-7xl">HTML is still a superpower.</h2></div><div class="grid gap-10 sm:grid-cols-2" data-reveal data-delay="1"><div><p class="text-3xl font-semibold tracking-[-.06em]">01</p><h3 class="mt-4 text-xl font-semibold">Server-first.</h3><p class="mt-3 leading-7 text-ink/60">Forms submit, dialogs close, and pages work before JavaScript enters the room.</p></div><div><p class="text-3xl font-semibold tracking-[-.06em]">02</p><h3 class="mt-4 text-xl font-semibold">Composable.</h3><p class="mt-3 leading-7 text-ink/60">Use one macro in a template or compose a complete login flow and admin console.</p></div><div><p class="text-3xl font-semibold tracking-[-.06em]">03</p><h3 class="mt-4 text-xl font-semibold">Your tokens.</h3><p class="mt-3 leading-7 text-ink/60">Semantic CSS variables keep themes, brands, and accessibility decisions in your hands.</p></div><div><p class="text-3xl font-semibold tracking-[-.06em]">04</p><h3 class="mt-4 text-xl font-semibold">Python-shaped.</h3><p class="mt-3 leading-7 text-ink/60">Stay in Flask, Jinja, and the tools you already know. Ship the useful thing.</p></div></div></div></section>
+
+      <section id="contribute" class="overflow-hidden border-y border-ink/15 bg-ink px-5 py-28 text-white md:px-10 md:py-36"><div class="relative mx-auto max-w-7xl"><div class="absolute -right-20 -top-32 h-80 w-80 rounded-full bg-violet/70 blur-3xl" aria-hidden="true"></div><div class="relative max-w-3xl" data-reveal><p class="text-sm font-semibold uppercase tracking-[.18em] text-lime">Open source by design</p><h2 class="mt-5 text-5xl font-medium leading-[.95] tracking-[-.08em] md:text-7xl">Bring your best server-rendered ideas.</h2><p class="mt-7 max-w-2xl text-lg leading-8 text-white/60">Jinjalume is early, opinionated, and ready for useful contributions. Add a component, improve an accessibility state, or bring the next application block.</p><div class="mt-9 flex flex-wrap gap-3"><a href="https://github.com/phcodesage/jinjalume/issues" class="rounded-full bg-lime px-6 py-3.5 text-base font-semibold text-ink transition hover:bg-white" target="_blank" rel="noreferrer">See open issues <span aria-hidden="true">↗</span></a><a href="https://github.com/phcodesage/jinjalume/blob/main/CONTRIBUTING.md" class="rounded-full border border-white/20 px-6 py-3.5 text-base font-semibold transition hover:border-lime hover:text-lime" target="_blank" rel="noreferrer">Read contributing guide <span aria-hidden="true">↗</span></a></div></div></div></section>
+    </main>
+
+    <footer class="bg-ink px-5 py-10 text-white md:px-10"><div class="mx-auto flex max-w-7xl flex-wrap items-end justify-between gap-8"><div><a href="#top" class="text-2xl font-semibold tracking-[-.08em] text-white">Jinjalume<span class="text-lime">.</span></a><p class="mt-2 text-white/45">Small components for serious Python apps.</p></div><div class="text-left text-sm text-white/45 sm:text-right"><p>MIT licensed · open source</p><p class="mt-1">© <span id="year">2026</span> Jinjalume contributors</p></div></div></footer>
+  </body>
+</html>
