@@ -1,0 +1,37 @@
+{% macro select_field(name, label=None, options=[], value="", help_text=None, error=None, required=False, class_name="") -%}
+  <div class="space-y-2 {{ class_name }}">
+    {% if label %}
+      <label for="{{ name }}" class="block text-sm font-medium text-[var(--jl-text)]">{{ label }}{% if required %} <span aria-hidden="true">*</span>{% endif %}</label>
+    {% endif %}
+    {% set describedby = [] %}
+    {% if help_text %}{% set describedby = describedby + [name ~ "-help"] %}{% endif %}
+    {% if error %}{% set describedby = describedby + [name ~ "-error"] %}{% endif %}
+    <select
+      id="{{ name }}"
+      name="{{ name }}"
+      {% if required %}required{% endif %}
+      {% if error %}aria-invalid="true"{% endif %}
+      {% if describedby %}aria-describedby="{{ describedby|join(' ') }}"{% endif %}
+      class="block w-full rounded-lg border-0 bg-[var(--jl-surface)] px-3 py-2.5 text-sm text-[var(--jl-text)] shadow-sm ring-1 ring-inset {% if error %}ring-[var(--jl-danger-border)] focus:ring-2 focus:ring-[var(--jl-danger)]{% else %}ring-[var(--jl-border)] focus:ring-2 focus:ring-[var(--jl-focus)]{% endif %}"
+    >
+      {% for option in options %}
+        {% if option is mapping %}
+          {% set option_value = option.get("value", "") %}
+          {% set option_label = option.get("label", option_value) %}
+          {% set option_disabled = option.get("disabled", False) %}
+        {% else %}
+          {% set option_value = option[0] %}
+          {% set option_label = option[1] %}
+          {% set option_disabled = False %}
+        {% endif %}
+        <option value="{{ option_value }}"{% if option_value|string == value|string %} selected{% endif %}{% if option_disabled %} disabled{% endif %}>{{ option_label }}</option>
+      {% endfor %}
+    </select>
+    {% if help_text %}
+      <p id="{{ name }}-help" class="text-sm text-[var(--jl-text-subtle)]">{{ help_text }}</p>
+    {% endif %}
+    {% if error %}
+      <p id="{{ name }}-error" class="text-sm text-[var(--jl-danger-text)]">{{ error }}</p>
+    {% endif %}
+  </div>
+{%- endmacro %}

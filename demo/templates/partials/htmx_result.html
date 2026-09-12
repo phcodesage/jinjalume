@@ -1,0 +1,5 @@
+{% from "jinjalume/components/alert.html" import alert %}
+
+{% if result_message %}
+  {{ alert(result_message, variant=result_variant, title=result_title) }}
+{% endif %}

@@ -1,21 +1,26 @@
 {% macro textarea_field(name, label=None, value="", rows=4, placeholder="", help_text=None, error=None, required=False, class_name="") -%}
   <div class="space-y-2 {{ class_name }}">
     {% if label %}
-      <label for="{{ name }}" class="block text-sm font-medium text-slate-900">{{ label }}{% if required %} <span aria-hidden="true">*</span>{% endif %}</label>
+      <label for="{{ name }}" class="block text-sm font-medium text-[var(--jl-text)]">{{ label }}{% if required %} <span aria-hidden="true">*</span>{% endif %}</label>
     {% endif %}
+    {% set describedby = [] %}
+    {% if help_text %}{% set describedby = describedby + [name ~ "-help"] %}{% endif %}
+    {% if error %}{% set describedby = describedby + [name ~ "-error"] %}{% endif %}
     <textarea
       id="{{ name }}"
       name="{{ name }}"
       rows="{{ rows }}"
       {% if placeholder %}placeholder="{{ placeholder }}"{% endif %}
       {% if required %}required{% endif %}
-      {% if error %}aria-invalid="true" aria-describedby="{{ name }}-error"{% endif %}
-      class="block w-full rounded-lg border-0 px-3 py-2.5 text-sm text-slate-900 shadow-sm ring-1 ring-inset {% if error %}ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-red-600{% else %}ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-slate-900{% endif %}"
+      {% if error %}aria-invalid="true"{% endif %}
+      {% if describedby %}aria-describedby="{{ describedby|join(' ') }}"{% endif %}
+      class="block w-full rounded-lg border-0 bg-[var(--jl-surface)] px-3 py-2.5 text-sm text-[var(--jl-text)] shadow-sm ring-1 ring-inset {% if error %}ring-[var(--jl-danger-border)] placeholder:text-[var(--jl-danger-text)] focus:ring-2 focus:ring-[var(--jl-danger)]{% else %}ring-[var(--jl-border)] placeholder:text-[var(--jl-text-subtle)] focus:ring-2 focus:ring-[var(--jl-focus)]{% endif %}"
     >{{ value }}</textarea>
+    {% if help_text %}
+      <p id="{{ name }}-help" class="text-sm text-[var(--jl-text-subtle)]">{{ help_text }}</p>
+    {% endif %}
     {% if error %}
-      <p id="{{ name }}-error" class="text-sm text-red-600">{{ error }}</p>
-    {% elif help_text %}
-      <p class="text-sm text-slate-500">{{ help_text }}</p>
+      <p id="{{ name }}-error" class="text-sm text-[var(--jl-danger-text)]">{{ error }}</p>
     {% endif %}
   </div>
 {%- endmacro %}

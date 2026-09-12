@@ -1,8 +1,8 @@
 {% macro card(title=None, description=None, class_name="") -%}
-  <section class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200 {{ class_name }}">
-    {% if title %}<h2 class="text-lg font-semibold text-slate-950">{{ title }}</h2>{% endif %}
-    {% if description %}<p class="{% if title %}mt-1 {% endif %}text-sm text-slate-600">{{ description }}</p>{% endif %}
-    <div class="{% if title or description %}mt-5 {% endif %}text-slate-700">
+  <section class="rounded-2xl bg-[var(--jl-surface)] p-6 shadow-sm ring-1 ring-[var(--jl-border)] {{ class_name }}">
+    {% if title %}<h2 class="text-lg font-semibold text-[var(--jl-text)]">{{ title }}</h2>{% endif %}
+    {% if description %}<p class="{% if title %}mt-1 {% endif %}text-sm text-[var(--jl-text-muted)]">{{ description }}</p>{% endif %}
+    <div class="{% if title or description %}mt-5 {% endif %}text-[var(--jl-text-muted)]">
       {{ caller() }}
     </div>
   </section>

@@ -21,6 +21,10 @@ make lint
 npm run build:css
 ```
 
+### Visual regression checks
+
+The component gallery has Playwright snapshots for desktop, mobile, and the dark theme. Install Chromium once with `npx playwright install chromium`, then run `npm run test:visual`. When a UI change is intentional, inspect the screenshots locally and update them explicitly with `npx playwright test --update-snapshots`. Do not update snapshots to hide an unintended layout change. CI uploads failed reports and screenshots for review without committing generated artifacts.
+
 ## Adding a component
 
 1. Add the component under `jinjalume/templates/jinjalume/components/`.
