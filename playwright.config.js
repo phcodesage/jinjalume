@@ -1,4 +1,16 @@
+const fs = require("fs");
+
 const { defineConfig, devices } = require("@playwright/test");
+
+const python =
+  process.env.PYTHON_BIN ||
+  (process.platform === "win32"
+    ? fs.existsSync(".venv\\Scripts\\python.exe")
+      ? ".venv\\Scripts\\python.exe"
+      : "python"
+    : fs.existsSync(".venv/bin/python")
+      ? ".venv/bin/python"
+      : "python");
 
 module.exports = defineConfig({
   testDir: "./tests/visual",
@@ -29,7 +41,7 @@ module.exports = defineConfig({
     },
   ],
   webServer: {
-    command: "npm run build:css && .venv/bin/python -m flask --app demo.app run --no-debugger --no-reload --port 5000",
+    command: `npm run build:css && ${python} -m flask --app demo.app run --no-debugger --no-reload --port 5000`,
     url: "http://127.0.0.1:5000",
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
