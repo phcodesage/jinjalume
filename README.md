@@ -102,7 +102,7 @@ The `/htmx` demo shows an optional HTMX enhancement around a normal Flask form. 
 
 The demo also includes realistic application screens at `/blocks`, `/login`, `/signup`, and `/admin`. The reusable block macros live under `jinjalume/blocks/` and compose the core components into auth flows and a responsive admin console. See [docs/blocks.md](docs/blocks.md) for signatures and copy-paste examples.
 
-The public landing page source lives in [`site/`](site/). The Pages workflow publishes it from the `main` branch; the repository's Pages setting should use **GitHub Actions** as its build source.
+The public landing page source lives in [`site/`](site/). The Pages workflow publishes it from the `main` branch. Before the first deployment, a repository administrator or maintainer must open [Settings → Pages](https://github.com/phcodesage/jinjalume/settings/pages) and select **GitHub Actions** as the build source; this is a one-time repository setting that cannot be enabled by the default workflow token.
 
 ## Development
 
