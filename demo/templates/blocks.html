@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% from "jinjalume/components/badge.html" import badge %}
+{% from "jinjalume/components/button.html" import button %}
+{% from "jinjalume/components/card.html" import card %}
+
+{% block title %}Jinjalume UI blocks{% endblock %}
+
+{% block content %}
+  <div class="max-w-3xl">
+    {{ badge("Copy-paste recipes", variant="success") }}
+    <h1 class="mt-6 text-4xl font-bold tracking-tight text-[var(--jl-text)] sm:text-5xl">Realistic UI blocks for your next Flask app.</h1>
+    <p class="mt-5 text-lg leading-8 text-[var(--jl-text-muted)]">Complete server-rendered screens composed from Jinjalume primitives. Each block keeps native HTML behavior and can be styled through the same semantic tokens.</p>
+  </div>
+
+  <div class="mt-10 grid gap-6 md:grid-cols-3">
+    {% call card("Sign in", "A focused login flow with validation-ready states.") %}
+      <div class="flex h-full flex-col justify-between gap-6">
+        <p class="text-sm text-[var(--jl-text-muted)]">Email, password, remember-me, and forgot-password affordances.</p>
+        {{ button("Preview login", href=url_for("login"), class_name="w-full") }}
+      </div>
+    {% endcall %}
+    {% call card("Create account", "A complete signup form with password guidance.") %}
+      <div class="flex h-full flex-col justify-between gap-6">
+        <p class="text-sm text-[var(--jl-text-muted)]">Profile details, confirmation, terms consent, and errors.</p>
+        {{ button("Preview signup", href=url_for("signup"), class_name="w-full") }}
+      </div>
+    {% endcall %}
+    {% call card("Admin dashboard", "A responsive workspace overview for operations teams.") %}
+      <div class="flex h-full flex-col justify-between gap-6">
+        <p class="text-sm text-[var(--jl-text-muted)]">Sidebar navigation, KPIs, orders, and recent activity.</p>
+        {{ button("Preview dashboard", href=url_for("admin"), class_name="w-full") }}
+      </div>
+    {% endcall %}
+  </div>
+{% endblock %}

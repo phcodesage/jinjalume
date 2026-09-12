@@ -7,17 +7,20 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='dist/jinjalume.css') }}">
   </head>
   <body class="min-h-screen bg-[var(--jl-page)] text-[var(--jl-text)] antialiased">
+    {% block site_header %}
     <header class="border-b border-[var(--jl-border)] bg-[var(--jl-surface)]">
       <div class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-4 lg:px-8">
         <a href="{{ url_for('index') }}" class="font-semibold text-[var(--jl-text)]">Jinjalume</a>
         <nav class="flex items-center gap-4 text-sm">
           <a href="{{ url_for('index') }}" class="text-[var(--jl-text-muted)] hover:text-[var(--jl-text)]">Components</a>
+          <a href="{{ url_for('blocks') }}" class="text-[var(--jl-text-muted)] hover:text-[var(--jl-text)]">UI blocks</a>
           <a href="{{ url_for('htmx_demo') }}" class="text-[var(--jl-text-muted)] hover:text-[var(--jl-text)]">HTMX demo</a>
           <button id="theme-toggle" type="button" aria-pressed="false" class="rounded-lg bg-[var(--jl-surface)] px-3 py-2 font-semibold text-[var(--jl-text)] ring-1 ring-inset ring-[var(--jl-border)] hover:bg-[var(--jl-surface-muted)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--jl-focus)]">Use dark mode</button>
         </nav>
       </div>
     </header>
-    <main class="mx-auto max-w-5xl px-6 py-12 lg:px-8">
+    {% endblock %}
+    <main class="{% block main_class %}mx-auto max-w-5xl px-6 py-12 lg:px-8{% endblock %}">
       {% block content %}{% endblock %}
     </main>
     <script>

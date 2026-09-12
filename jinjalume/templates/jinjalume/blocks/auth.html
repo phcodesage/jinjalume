@@ -1,0 +1,69 @@
+{% from "jinjalume/components/alert.html" import alert %}
+{% from "jinjalume/components/button.html" import button %}
+{% from "jinjalume/components/input.html" import input_field %}
+
+{% macro auth_shell(title, description=None, eyebrow="Welcome", alternate_label=None, alternate_href=None, alternate_text=None, class_name="") -%}
+  <div class="min-h-screen bg-[var(--jl-page)] {{ class_name }}">
+    <div class="mx-auto grid min-h-screen max-w-7xl lg:grid-cols-2">
+      <aside class="hidden flex-col justify-between bg-[var(--jl-primary)] p-10 text-[var(--jl-primary-contrast)] lg:flex xl:p-16">
+        <a href="/" class="text-lg font-bold tracking-tight">Jinjalume</a>
+        <div class="max-w-md">
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] opacity-70">Server-rendered UI</p>
+          <p class="mt-5 text-4xl font-bold tracking-tight">Build focused product experiences with plain HTML.</p>
+          <p class="mt-5 text-base leading-7 opacity-75">Compose accessible forms and application screens in Jinja, then let your existing Tailwind pipeline own the visual system.</p>
+        </div>
+        <p class="text-sm opacity-60">A Jinjalume UI block</p>
+      </aside>
+
+      <section class="flex items-center px-6 py-12 sm:px-10 lg:px-16">
+        <div class="mx-auto w-full max-w-md">
+          <a href="/" class="text-lg font-bold tracking-tight text-[var(--jl-text)] lg:hidden">Jinjalume</a>
+          <p class="mt-8 text-sm font-semibold uppercase tracking-[0.16em] text-[var(--jl-accent-text)] lg:mt-0">{{ eyebrow }}</p>
+          <h1 class="mt-3 text-3xl font-bold tracking-tight text-[var(--jl-text)]">{{ title }}</h1>
+          {% if description %}<p class="mt-3 text-sm leading-6 text-[var(--jl-text-muted)]">{{ description }}</p>{% endif %}
+          <div class="mt-8">{{ caller() }}</div>
+          {% if alternate_label and alternate_href and alternate_text %}
+            <p class="mt-8 text-center text-sm text-[var(--jl-text-muted)]">{{ alternate_label }} <a href="{{ alternate_href }}" class="font-semibold text-[var(--jl-accent-text)] hover:underline">{{ alternate_text }}</a></p>
+          {% endif %}
+        </div>
+      </section>
+    </div>
+  </div>
+{%- endmacro %}
+
+{% macro login_form(action="", method="post", email="", remember=False, email_error=None, password_error=None, form_error=None, forgot_href="#", submit_label="Sign in", class_name="") -%}
+  <form action="{{ action }}" method="{{ method }}" class="space-y-5 {{ class_name }}">
+    {% if form_error %}{{ alert(form_error, variant="danger", title="Sign-in failed") }}{% endif %}
+    {{ input_field("email", label="Email address", value=email, type="email", placeholder="you@example.com", error=email_error, required=True, autocomplete="email") }}
+    <div>
+      <div class="mb-2 flex items-center justify-between gap-4">
+        <label for="password" class="block text-sm font-medium text-[var(--jl-text)]">Password</label>
+        {% if forgot_href %}<a href="{{ forgot_href }}" class="text-sm font-semibold text-[var(--jl-accent-text)] hover:underline">Forgot password?</a>{% endif %}
+      </div>
+      {{ input_field("password", type="password", placeholder="••••••••", error=password_error, required=True, autocomplete="current-password") }}
+    </div>
+    <label for="remember" class="flex items-center gap-3 text-sm text-[var(--jl-text-muted)]">
+      <input id="remember" name="remember" type="checkbox" value="1"{% if remember %} checked{% endif %} class="h-4 w-4 rounded border-[var(--jl-border)] bg-[var(--jl-surface)] text-[var(--jl-primary)] focus:ring-2 focus:ring-[var(--jl-focus)]">
+      <span>Keep me signed in</span>
+    </label>
+    {{ button(submit_label, variant="primary", size="lg", type="submit", class_name="w-full") }}
+  </form>
+{%- endmacro %}
+
+{% macro signup_form(action="", method="post", name="", email="", name_error=None, email_error=None, password_error=None, confirmation_error=None, terms_error=None, form_error=None, terms_href="#", submit_label="Create account", class_name="") -%}
+  <form action="{{ action }}" method="{{ method }}" class="space-y-5 {{ class_name }}">
+    {% if form_error %}{{ alert(form_error, variant="danger", title="Could not create account") }}{% endif %}
+    {{ input_field("name", label="Full name", value=name, placeholder="Taylor Morgan", error=name_error, required=True, autocomplete="name") }}
+    {{ input_field("email", label="Email address", value=email, type="email", placeholder="you@example.com", error=email_error, required=True, autocomplete="email") }}
+    {{ input_field("password", label="Password", type="password", placeholder="At least 8 characters", help_text="Use a mix of letters, numbers, and symbols.", error=password_error, required=True, autocomplete="new-password") }}
+    {{ input_field("password_confirmation", label="Confirm password", type="password", placeholder="Repeat your password", error=confirmation_error, required=True, autocomplete="new-password") }}
+    <div>
+      <label for="terms" class="flex items-start gap-3 text-sm text-[var(--jl-text-muted)]">
+        <input id="terms" name="terms" type="checkbox" value="1"{% if terms_error %} aria-invalid="true" aria-describedby="terms-error"{% endif %} class="mt-0.5 h-4 w-4 shrink-0 rounded border-[var(--jl-border)] bg-[var(--jl-surface)] text-[var(--jl-primary)] focus:ring-2 focus:ring-[var(--jl-focus)]">
+        <span>I agree to the <a href="{{ terms_href }}" class="font-semibold text-[var(--jl-accent-text)] hover:underline">terms and conditions</a>.</span>
+      </label>
+      {% if terms_error %}<p id="terms-error" class="mt-2 text-sm text-[var(--jl-danger-text)]">{{ terms_error }}</p>{% endif %}
+    </div>
+    {{ button(submit_label, variant="primary", size="lg", type="submit", class_name="w-full") }}
+  </form>
+{%- endmacro %}

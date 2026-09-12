@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% from "jinjalume/blocks/auth.html" import auth_shell, login_form %}
+{% from "jinjalume/components/alert.html" import alert %}
+
+{% block title %}Sign in · Jinjalume{% endblock %}
+{% block site_header %}{% endblock %}
+{% block main_class %}p-0{% endblock %}
+
+{% block content %}
+  {% call auth_shell(
+    "Welcome back",
+    description="Sign in to continue to your workspace.",
+    eyebrow="Sign in",
+    alternate_label="New to Jinjalume?",
+    alternate_href=url_for("signup"),
+    alternate_text="Create an account"
+  ) %}
+    {% if success_message %}{{ alert(success_message, variant="success", title="Demo complete") }}{% endif %}
+    {{ login_form(
+      action=url_for("login"),
+      email=email,
+      remember=remember,
+      email_error=email_error,
+      password_error=password_error,
+      form_error=form_error,
+      forgot_href="#forgot-password"
+    ) }}
+  {% endcall %}
+{% endblock %}

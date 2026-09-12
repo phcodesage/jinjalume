@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% from "jinjalume/blocks/dashboard.html" import dashboard_shell, stat_card %}
+{% from "jinjalume/components/badge.html" import badge %}
+{% from "jinjalume/components/button.html" import button %}
+{% from "jinjalume/components/select.html" import select_field %}
+
+{% block title %}Admin dashboard · Jinjalume{% endblock %}
+{% block site_header %}{% endblock %}
+{% block main_class %}max-w-none p-0{% endblock %}
+
+{% block content %}
+  {% call dashboard_shell(
+    title="Overview",
+    description="Monitor your workspace performance and keep an eye on the latest customer activity.",
+    nav_items=nav_items,
+    active_item="Overview",
+    user_name="Alex Morgan",
+    user_email="alex@example.com"
+  ) %}
+    <section aria-labelledby="metrics-heading">
+      <div class="flex items-end justify-between gap-4">
+        <div><h2 id="metrics-heading" class="text-lg font-bold text-[var(--jl-text)]">At a glance</h2><p class="mt-1 text-sm text-[var(--jl-text-muted)]">Your key numbers for this month.</p></div>
+        {{ button("Export report", variant="secondary", size="sm", href="#export") }}
+      </div>
+      <div class="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {% for metric in metrics %}
+          {{ stat_card(metric.label, metric.value, change=metric.change, trend=metric.get("trend", "up"), note=metric.note, icon=metric.icon) }}
+        {% endfor %}
+      </div>
+    </section>
+
+    <div class="mt-8 grid gap-6 xl:grid-cols-[minmax(0,1.45fr)_minmax(20rem,0.55fr)]">
+      <section id="orders" aria-labelledby="orders-heading" class="min-w-0 rounded-2xl bg-[var(--jl-surface)] shadow-sm ring-1 ring-[var(--jl-border)]">
+        <div class="flex flex-wrap items-start justify-between gap-4 border-b border-[var(--jl-border)] p-5 sm:p-6">
+          <div><h2 id="orders-heading" class="text-lg font-bold text-[var(--jl-text)]">Recent orders</h2><p class="mt-1 text-sm text-[var(--jl-text-muted)]">The latest transactions across your workspace.</p></div>
+          <div class="w-40">{{ select_field("order-period", label="Period", options=[{"value": "30", "label": "Last 30 days"}, {"value": "90", "label": "Last 90 days"}], value="30", class_name="text-xs") }}</div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full min-w-[40rem] text-left text-sm">
+            <caption class="sr-only">Recent orders</caption>
+            <thead class="border-b border-[var(--jl-border)] text-xs uppercase tracking-wide text-[var(--jl-text-subtle)]">
+              <tr><th scope="col" class="px-5 py-3 font-semibold sm:px-6">Customer</th><th scope="col" class="px-5 py-3 font-semibold sm:px-6">Status</th><th scope="col" class="px-5 py-3 text-right font-semibold sm:px-6">Amount</th><th scope="col" class="px-5 py-3 text-right font-semibold sm:px-6">Date</th></tr>
+            </thead>
+            <tbody class="divide-y divide-[var(--jl-border)]">
+              {% for order in orders %}
+                {% set status_variant = "success" if order.status == "Paid" else "warning" if order.status == "Processing" else "danger" %}
+                <tr class="hover:bg-[var(--jl-surface-muted)]">
+                  <th scope="row" class="whitespace-nowrap px-5 py-4 font-semibold text-[var(--jl-text)] sm:px-6"><span class="block">{{ order.customer }}</span><span class="mt-1 block text-xs font-normal text-[var(--jl-text-subtle)]">{{ order.email }}</span></th>
+                  <td class="whitespace-nowrap px-5 py-4 sm:px-6">{{ badge(order.status, variant=status_variant) }}</td>
+                  <td class="whitespace-nowrap px-5 py-4 text-right font-semibold text-[var(--jl-text)] sm:px-6">{{ order.amount }}</td>
+                  <td class="whitespace-nowrap px-5 py-4 text-right text-[var(--jl-text-muted)] sm:px-6">{{ order.date }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="border-t border-[var(--jl-border)] px-5 py-4 sm:px-6"><a href="#orders" class="text-sm font-semibold text-[var(--jl-accent-text)] hover:underline">View all orders →</a></div>
+      </section>
+
+      <section id="analytics" aria-labelledby="activity-heading" class="rounded-2xl bg-[var(--jl-surface)] p-5 shadow-sm ring-1 ring-[var(--jl-border)] sm:p-6">
+        <div class="flex items-start justify-between gap-4"><div><h2 id="activity-heading" class="text-lg font-bold text-[var(--jl-text)]">Recent activity</h2><p class="mt-1 text-sm text-[var(--jl-text-muted)]">What is happening today.</p></div><span aria-hidden="true" class="text-xl text-[var(--jl-accent-text)]">✦</span></div>
+        <ol class="mt-6 space-y-6">
+          {% for event in activity %}
+            <li class="relative pl-7">
+              <span aria-hidden="true" class="absolute left-0 top-1.5 h-2.5 w-2.5 rounded-full bg-[var(--jl-accent)] ring-4 ring-[var(--jl-accent-surface)]"></span>
+              {% if not loop.last %}<span aria-hidden="true" class="absolute bottom-[-1.5rem] left-[0.29rem] top-4 w-px bg-[var(--jl-border)]"></span>{% endif %}
+              <p class="text-sm font-semibold text-[var(--jl-text)]">{{ event.label }}</p>
+              <p class="mt-1 text-sm leading-5 text-[var(--jl-text-muted)]">{{ event.detail }}</p>
+              <p class="mt-1 text-xs text-[var(--jl-text-subtle)]">{{ event.time }}</p>
+            </li>
+          {% endfor %}
+        </ol>
+        <a href="#activity" class="mt-8 inline-block text-sm font-semibold text-[var(--jl-accent-text)] hover:underline">View activity log →</a>
+      </section>
+    </div>
+  {% endcall %}
+{% endblock %}

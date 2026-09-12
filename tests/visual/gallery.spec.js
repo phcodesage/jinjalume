@@ -2,7 +2,8 @@ const { test, expect } = require("@playwright/test");
 
 async function screenshotOptions(page, testInfo) {
   const viewport = page.viewportSize();
-  const minimumHeight = testInfo.project.name === "mobile" ? 2196 : 1520;
+  // Keep the screenshot size stable when Chromium rounds document height differently.
+  const minimumHeight = testInfo.project.name === "mobile" ? 2216 : 1520;
   const contentHeight = await page.evaluate(
     () => document.documentElement.scrollHeight,
   );

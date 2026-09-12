@@ -1,4 +1,4 @@
-{% macro input_field(name, label=None, value="", type="text", placeholder="", help_text=None, error=None, required=False, class_name="") -%}
+{% macro input_field(name, label=None, value="", type="text", placeholder="", help_text=None, error=None, required=False, class_name="", autocomplete=None) -%}
   <div class="space-y-2 {{ class_name }}">
     {% if label %}
       <label for="{{ name }}" class="block text-sm font-medium text-[var(--jl-text)]">{{ label }}{% if required %} <span aria-hidden="true">*</span>{% endif %}</label>
@@ -12,6 +12,7 @@
       type="{{ type }}"
       value="{{ value }}"
       {% if placeholder %}placeholder="{{ placeholder }}"{% endif %}
+      {% if autocomplete %}autocomplete="{{ autocomplete }}"{% endif %}
       {% if required %}required{% endif %}
       {% if error %}aria-invalid="true"{% endif %}
       {% if describedby %}aria-describedby="{{ describedby|join(' ') }}"{% endif %}
