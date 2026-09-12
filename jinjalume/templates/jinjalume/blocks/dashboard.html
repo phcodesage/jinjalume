@@ -1,0 +1,90 @@
+{% from "jinjalume/components/avatar.html" import avatar %}
+{% from "jinjalume/components/badge.html" import badge %}
+
+{% macro dashboard_nav(nav_items=[], active_item="Overview", class_name="") -%}
+  <nav aria-label="Primary navigation" class="space-y-1 {{ class_name }}">
+    {% for item in nav_items %}
+      {% set label = item.get("label", "Navigation item") %}
+      {% set active = item.get("active", label == active_item) %}
+      <a href="{{ item.get('href', '#') }}"{% if active %} aria-current="page"{% endif %} class="flex items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold {% if active %}bg-[var(--jl-primary)] text-[var(--jl-primary-contrast)]{% else %}text-[var(--jl-text-muted)] hover:bg-[var(--jl-surface-muted)] hover:text-[var(--jl-text)]{% endif %}">
+        <span class="flex items-center gap-3">
+          <span aria-hidden="true" class="inline-flex h-6 w-6 items-center justify-center rounded-md {% if active %}bg-white/15{% else %}bg-[var(--jl-surface-muted)]{% endif %} text-xs">{{ label|first|upper }}</span>
+          <span>{{ label }}</span>
+        </span>
+        {% if item.get("badge") %}{{ badge(item.get("badge"), variant="neutral", class_name="!px-2 !py-0.5") }}{% endif %}
+      </a>
+    {% endfor %}
+  </nav>
+{%- endmacro %}
+
+{% macro stat_card(label, value, change=None, trend="up", note=None, icon=None, class_name="") -%}
+  {% set trend_classes = {
+    "up": "text-[var(--jl-success-text)]",
+    "down": "text-[var(--jl-danger-text)]",
+    "neutral": "text-[var(--jl-text-muted)]"
+  } %}
+  <article class="rounded-2xl bg-[var(--jl-surface)] p-5 shadow-sm ring-1 ring-[var(--jl-border)] {{ class_name }}">
+    <div class="flex items-start justify-between gap-4">
+      <p class="text-sm font-medium text-[var(--jl-text-muted)]">{{ label }}</p>
+      {% if icon %}<span aria-hidden="true" class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--jl-accent-surface)] text-sm font-bold text-[var(--jl-accent-text)]">{{ icon }}</span>{% endif %}
+    </div>
+    <div class="mt-5 flex items-baseline gap-3">
+      <p class="text-3xl font-bold tracking-tight text-[var(--jl-text)]">{{ value }}</p>
+      {% if change %}<span class="text-sm font-semibold {{ trend_classes.get(trend, trend_classes['neutral']) }}">{{ change }}</span>{% endif %}
+    </div>
+    {% if note %}<p class="mt-2 text-xs text-[var(--jl-text-subtle)]">{{ note }}</p>{% endif %}
+  </article>
+{%- endmacro %}
+
+{% macro dashboard_shell(title="Overview", description=None, nav_items=[], active_item="Overview", user_name="Alex Morgan", user_email="alex@example.com", class_name="") -%}
+  <div class="min-h-screen bg-[var(--jl-page)] text-[var(--jl-text)] {{ class_name }}">
+    <div class="mx-auto flex min-h-screen max-w-[1600px]">
+      <aside class="hidden w-64 shrink-0 flex-col border-r border-[var(--jl-border)] bg-[var(--jl-surface)] p-5 lg:flex">
+        <a href="/" class="flex items-center gap-3 px-3 text-lg font-bold tracking-tight">
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--jl-primary)] text-sm text-[var(--jl-primary-contrast)]">J</span>
+          <span>Jinjalume<span class="text-[var(--jl-accent-text)]">.</span></span>
+        </a>
+        <p class="px-3 pt-1 text-xs text-[var(--jl-text-subtle)]">Workspace console</p>
+        <div class="mt-8">{{ dashboard_nav(nav_items, active_item) }}</div>
+        <div class="mt-auto border-t border-[var(--jl-border)] pt-5">
+          <div class="flex items-center gap-3 px-2">
+            {{ avatar(user_name, size="sm") }}
+            <div class="min-w-0">
+              <p class="truncate text-sm font-semibold text-[var(--jl-text)]">{{ user_name }}</p>
+              <p class="truncate text-xs text-[var(--jl-text-subtle)]">{{ user_email }}</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <div class="min-w-0 flex-1">
+        <header class="border-b border-[var(--jl-border)] bg-[var(--jl-surface)] px-5 py-4 sm:px-8">
+          <div class="flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <details class="relative lg:hidden">
+                <summary class="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-lg bg-[var(--jl-surface)] text-[var(--jl-text)] ring-1 ring-inset ring-[var(--jl-border)]" aria-label="Open navigation">☰</summary>
+                <div class="absolute left-0 top-12 z-10 w-64 rounded-xl border border-[var(--jl-border)] bg-[var(--jl-surface)] p-3 shadow-xl">{{ dashboard_nav(nav_items, active_item) }}</div>
+              </details>
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--jl-text-subtle)]">Workspace</p>
+                <h1 class="mt-1 text-xl font-bold tracking-tight text-[var(--jl-text)]">{{ title }}</h1>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <button type="button" aria-label="View notifications" class="relative hidden h-10 w-10 rounded-lg text-[var(--jl-text-muted)] hover:bg-[var(--jl-surface-muted)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--jl-focus)] sm:inline-flex sm:items-center sm:justify-center">
+                <svg aria-hidden="true" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9a6 6 0 0 0-12 0v.75a8.967 8.967 0 0 1-2.31 6.022 23.848 23.848 0 0 0 5.454 1.31m5.713 0a24.255 24.255 0 0 1-5.713 0m5.713 0a3 3 0 1 1-5.713 0" /></svg>
+                <span class="absolute right-2 top-2 h-2 w-2 rounded-full bg-[var(--jl-danger)]"></span>
+              </button>
+              <div class="hidden text-right sm:block"><p class="text-sm font-semibold text-[var(--jl-text)]">{{ user_name }}</p><p class="text-xs text-[var(--jl-text-subtle)]">Administrator</p></div>
+              {{ avatar(user_name, size="sm") }}
+            </div>
+          </div>
+        </header>
+        <div class="px-5 py-8 sm:px-8">
+          {% if description %}<p class="mb-8 max-w-2xl text-sm leading-6 text-[var(--jl-text-muted)]">{{ description }}</p>{% endif %}
+          {{ caller() }}
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endmacro %}

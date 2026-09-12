@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% from "jinjalume/blocks/auth.html" import auth_shell, signup_form %}
+{% from "jinjalume/components/alert.html" import alert %}
+
+{% block title %}Create account · Jinjalume{% endblock %}
+{% block site_header %}{% endblock %}
+{% block main_class %}p-0{% endblock %}
+
+{% block content %}
+  {% call auth_shell(
+    "Create your account",
+    description="Start building server-rendered experiences with Jinjalume.",
+    eyebrow="Get started",
+    alternate_label="Already have an account?",
+    alternate_href=url_for("login"),
+    alternate_text="Sign in"
+  ) %}
+    {% if success_message %}{{ alert(success_message, variant="success", title="Demo complete") }}{% endif %}
+    {{ signup_form(
+      action=url_for("signup"),
+      name=name,
+      email=email,
+      name_error=name_error,
+      email_error=email_error,
+      password_error=password_error,
+      confirmation_error=confirmation_error,
+      terms_error=terms_error,
+      form_error=form_error,
+      terms_href="#terms"
+    ) }}
+  {% endcall %}
+{% endblock %}

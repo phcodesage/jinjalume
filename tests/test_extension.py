@@ -61,6 +61,21 @@ def test_extended_components_render():
     assert "Dialog content" in rendered
 
 
+def test_input_field_supports_browser_autocomplete_hints():
+    app = Flask(__name__)
+    Jinjalume(app)
+
+    template = """
+    {% from "jinjalume/components/input.html" import input_field %}
+    {{ input_field("email", type="email", autocomplete="email") }}
+    """
+
+    with app.app_context():
+        rendered = render_template_string(template)
+
+    assert 'autocomplete="email"' in rendered
+
+
 def test_select_field_supports_selected_disabled_and_accessible_messages():
     app = Flask(__name__)
     Jinjalume(app)

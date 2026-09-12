@@ -1,6 +1,6 @@
 # Visual regression tests
 
-The gallery is checked with Playwright at desktop (`1280x800`) and mobile (`390x844`) Chromium viewports, plus a desktop dark-theme snapshot. Reference PNGs live beside `gallery.spec.js` in its snapshot directory.
+The component gallery and the login, signup, and admin dashboard blocks are checked with Playwright at desktop (`1280x800`) and mobile (`390x844`) Chromium viewports. The gallery also has a dark-theme snapshot. Reference PNGs live beside each spec in its snapshot directory.
 
 Install the Python development environment and browser once:
 

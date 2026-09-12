@@ -13,6 +13,7 @@ Jinjalume is an open-source, HTML-first component kit for developers who want re
 - A copy-paste [component reference](docs/components.md) with signatures and rendered markup examples
 - Tailwind CSS v4 build setup
 - A working Flask demo
+- Copy-paste UI blocks for authentication and admin dashboards
 - Contributor documentation, issue templates, and continuous integration
 
 ## Quick start
@@ -96,6 +97,10 @@ See [docs/components.md](docs/components.md) for copy-paste examples and the ful
 The demo includes a light/dark toggle backed by semantic CSS custom properties. Light mode is the default; applications opt in by setting `data-theme="dark"` on the document root. Read the [theming proposal](docs/theming.md) for the token contract and Tailwind integration notes.
 
 The `/htmx` demo shows an optional HTMX enhancement around a normal Flask form. The form remains usable without JavaScript or HTMX, and HTMX is loaded only by that demo page. The core package has no HTMX dependency.
+
+## UI blocks
+
+The demo also includes realistic application screens at `/blocks`, `/login`, `/signup`, and `/admin`. The reusable block macros live under `jinjalume/blocks/` and compose the core components into auth flows and a responsive admin console. See [docs/blocks.md](docs/blocks.md) for signatures and copy-paste examples.
 
 ## Development
 

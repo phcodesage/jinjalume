@@ -114,7 +114,7 @@ Rendered shape:
 ) }}
 ```
 
-Signature: `input_field(name, label=None, value="", type="text", placeholder="", help_text=None, error=None, required=False, class_name="")`
+Signature: `input_field(name, label=None, value="", type="text", placeholder="", help_text=None, error=None, required=False, class_name="", autocomplete=None)`
 
 `type` is passed to the native input. When `error` is present, the control gets `aria-invalid="true"` and a linked error message. Help and error messages get deterministic IDs and are combined in `aria-describedby`.
 
