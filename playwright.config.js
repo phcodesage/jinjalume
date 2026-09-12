@@ -40,10 +40,18 @@ module.exports = defineConfig({
       use: { ...devices["Desktop Chrome"], viewport: { width: 390, height: 844 } },
     },
   ],
-  webServer: {
-    command: `npm run build:css && ${python} -m flask --app demo.app run --no-debugger --no-reload --port 5000`,
-    url: "http://127.0.0.1:5000",
-    reuseExistingServer: !process.env.CI,
-    timeout: 120_000,
-  },
+  webServer: [
+    {
+      command: `npm run build:css && ${python} -m flask --app demo.app run --no-debugger --no-reload --port 5000`,
+      url: "http://127.0.0.1:5000",
+      reuseExistingServer: !process.env.CI,
+      timeout: 120_000,
+    },
+    {
+      command: `${python} -m http.server 8000 --directory site`,
+      url: "http://127.0.0.1:8000",
+      reuseExistingServer: !process.env.CI,
+      timeout: 120_000,
+    },
+  ],
 });
