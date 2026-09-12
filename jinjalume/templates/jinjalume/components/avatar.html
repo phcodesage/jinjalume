@@ -4,7 +4,7 @@
     "md": "h-10 w-10 text-sm",
     "lg": "h-14 w-14 text-lg"
   } %}
-  {% set classes = "inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-violet-100 font-semibold text-violet-700 ring-2 ring-white " ~ sizes.get(size, sizes["md"]) ~ " " ~ class_name %}
+  {% set classes = "inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-[var(--jl-accent-surface)] font-semibold text-[var(--jl-accent-text)] ring-2 ring-[var(--jl-surface)] " ~ sizes.get(size, sizes["md"]) ~ " " ~ class_name %}
   {% if src %}
     <img src="{{ src }}" alt="{{ name }}" class="{{ classes }}">
   {% else %}

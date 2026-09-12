@@ -1,4 +1,83 @@
 @import "tailwindcss";
 
+:root {
+  color-scheme: light;
+  --jl-page: #f8fafc;
+  --jl-surface: #ffffff;
+  --jl-surface-muted: #f8fafc;
+  --jl-text: #0f172a;
+  --jl-text-muted: #475569;
+  --jl-text-subtle: #64748b;
+  --jl-border: #e2e8f0;
+  --jl-primary: #0f172a;
+  --jl-primary-hover: #334155;
+  --jl-primary-contrast: #ffffff;
+  --jl-danger: #dc2626;
+  --jl-danger-hover: #ef4444;
+  --jl-danger-contrast: #ffffff;
+  --jl-focus: #0f172a;
+  --jl-info-surface: #f0f9ff;
+  --jl-info-border: #bae6fd;
+  --jl-info-text: #0c4a6e;
+  --jl-success-surface: #ecfdf5;
+  --jl-success-border: #a7f3d0;
+  --jl-success-text: #065f46;
+  --jl-warning-surface: #fffbeb;
+  --jl-warning-border: #fde68a;
+  --jl-warning-text: #92400e;
+  --jl-danger-surface: #fef2f2;
+  --jl-danger-border: #fecaca;
+  --jl-danger-text: #991b1b;
+  --jl-neutral-surface: #f1f5f9;
+  --jl-neutral-text: #334155;
+  --jl-accent: #7c3aed;
+  --jl-accent-surface: #ede9fe;
+  --jl-accent-text: #6d28d9;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --jl-page: #0f172a;
+  --jl-surface: #1e293b;
+  --jl-surface-muted: #334155;
+  --jl-text: #f8fafc;
+  --jl-text-muted: #cbd5e1;
+  --jl-text-subtle: #94a3b8;
+  --jl-border: #475569;
+  --jl-primary: #e2e8f0;
+  --jl-primary-hover: #f8fafc;
+  --jl-primary-contrast: #0f172a;
+  --jl-danger: #ef4444;
+  --jl-danger-hover: #f87171;
+  --jl-danger-contrast: #450a0a;
+  --jl-focus: #e2e8f0;
+  --jl-info-surface: #082f49;
+  --jl-info-border: #0c4a6e;
+  --jl-info-text: #bae6fd;
+  --jl-success-surface: #052e16;
+  --jl-success-border: #166534;
+  --jl-success-text: #bbf7d0;
+  --jl-warning-surface: #451a03;
+  --jl-warning-border: #92400e;
+  --jl-warning-text: #fde68a;
+  --jl-danger-surface: #450a0a;
+  --jl-danger-border: #991b1b;
+  --jl-danger-text: #fecaca;
+  --jl-neutral-surface: #334155;
+  --jl-neutral-text: #e2e8f0;
+  --jl-accent: #c4b5fd;
+  --jl-accent-surface: #4c1d95;
+  --jl-accent-text: #ede9fe;
+}
+
 @source "../../demo/templates";
 @source "../../jinjalume/templates";
+
+.htmx-indicator {
+  display: none;
+}
+
+.htmx-request .htmx-indicator,
+.htmx-request.htmx-indicator {
+  display: inline-flex;
+}

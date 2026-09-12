@@ -1,9 +1,9 @@
 {% macro badge(label, variant="neutral", class_name="") -%}
   {% set variants = {
-    "neutral": "bg-slate-100 text-slate-700",
-    "success": "bg-emerald-100 text-emerald-700",
-    "warning": "bg-amber-100 text-amber-800",
-    "danger": "bg-red-100 text-red-700"
+    "neutral": "bg-[var(--jl-neutral-surface)] text-[var(--jl-neutral-text)]",
+    "success": "bg-[var(--jl-success-surface)] text-[var(--jl-success-text)]",
+    "warning": "bg-[var(--jl-warning-surface)] text-[var(--jl-warning-text)]",
+    "danger": "bg-[var(--jl-danger-surface)] text-[var(--jl-danger-text)]"
   } %}
   <span class="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold {{ variants.get(variant, variants["neutral"]) }} {{ class_name }}">{{ label }}</span>
 {%- endmacro %}

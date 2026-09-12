@@ -1,16 +1,16 @@
 {% macro modal(id, title, description=None, class_name="") -%}
-  <dialog id="{{ id }}" aria-labelledby="{{ id }}-title" class="m-auto w-[calc(100%-2rem)] max-w-lg rounded-2xl border-0 bg-white p-0 text-slate-950 shadow-2xl backdrop:bg-slate-950/60 {{ class_name }}">
+  <dialog id="{{ id }}" aria-labelledby="{{ id }}-title"{% if description %} aria-describedby="{{ id }}-description"{% endif %} class="m-auto w-[calc(100%-2rem)] max-w-lg rounded-2xl border-0 bg-[var(--jl-surface)] p-0 text-[var(--jl-text)] shadow-2xl backdrop:bg-slate-950/60 {{ class_name }}">
     <div class="p-6">
       <div class="flex items-start justify-between gap-6">
         <div>
           <h2 id="{{ id }}-title" class="text-lg font-semibold">{{ title }}</h2>
-          {% if description %}<p class="mt-1 text-sm text-slate-600">{{ description }}</p>{% endif %}
+          {% if description %}<p id="{{ id }}-description" class="mt-1 text-sm text-[var(--jl-text-muted)]">{{ description }}</p>{% endif %}
         </div>
         <form method="dialog">
-          <button type="submit" aria-label="Close dialog" class="rounded-md p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-slate-900">&times;</button>
+          <button type="submit" aria-label="Close dialog" class="rounded-md p-1 text-[var(--jl-text-subtle)] hover:bg-[var(--jl-surface-muted)] hover:text-[var(--jl-text)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--jl-focus)]">&times;</button>
         </form>
       </div>
-      <div class="mt-5 text-sm text-slate-700">{{ caller() }}</div>
+      <div class="mt-5 text-sm text-[var(--jl-text-muted)]">{{ caller() }}</div>
     </div>
   </dialog>
 {%- endmacro %}

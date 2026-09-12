@@ -1,8 +1,8 @@
 {% macro button(label, variant="primary", size="md", type="button", href=None, class_name="", disabled=False) -%}
   {% set variants = {
-    "primary": "bg-slate-900 text-white hover:bg-slate-700 focus-visible:outline-slate-900",
-    "secondary": "bg-white text-slate-900 ring-1 ring-inset ring-slate-300 hover:bg-slate-50 focus-visible:outline-slate-900",
-    "danger": "bg-red-600 text-white hover:bg-red-500 focus-visible:outline-red-600"
+    "primary": "bg-[var(--jl-primary)] text-[var(--jl-primary-contrast)] hover:bg-[var(--jl-primary-hover)] focus-visible:outline-[var(--jl-focus)]",
+    "secondary": "bg-[var(--jl-surface)] text-[var(--jl-text)] ring-1 ring-inset ring-[var(--jl-border)] hover:bg-[var(--jl-surface-muted)] focus-visible:outline-[var(--jl-focus)]",
+    "danger": "bg-[var(--jl-danger)] text-[var(--jl-danger-contrast)] hover:bg-[var(--jl-danger-hover)] focus-visible:outline-[var(--jl-danger)]"
   } %}
   {% set sizes = {
     "sm": "rounded-md px-3 py-2 text-sm",

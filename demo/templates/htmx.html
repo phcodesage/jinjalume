@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% from "jinjalume/components/button.html" import button %}
+{% from "jinjalume/components/card.html" import card %}
+{% from "jinjalume/components/input.html" import input_field %}
+{% from "jinjalume/components/spinner.html" import spinner %}
+
+{% block title %}Optional HTMX example · Jinjalume{% endblock %}
+
+{% block content %}
+  <div class="max-w-2xl">
+    <p class="text-sm font-semibold text-[var(--jl-accent-text)]">Optional integration</p>
+    <h1 class="mt-3 text-4xl font-bold tracking-tight text-[var(--jl-text)]">Progressive enhancement with HTMX</h1>
+    <p class="mt-5 text-lg leading-8 text-[var(--jl-text-muted)]">The form is a normal POST first. When HTMX is available, only the result region is replaced.</p>
+  </div>
+
+  <div class="mt-10 max-w-xl">
+    {% call card("Send a message", "Try it with JavaScript disabled to see the full-page fallback.") %}
+      <form method="post" action="{{ url_for('htmx_demo') }}" hx-post="{{ url_for('htmx_demo') }}" hx-target="#htmx-result" hx-swap="innerHTML" hx-indicator="#htmx-spinner" class="space-y-5">
+        {{ input_field("message", label="Message", placeholder="Hello from the server…", help_text="This value is submitted to the Flask route.", required=True) }}
+        <div class="flex items-center gap-3">
+          {{ button("Submit", type="submit") }}
+          <span id="htmx-spinner">{{ spinner("Submitting") }}</span>
+        </div>
+      </form>
+      <div id="htmx-result" aria-live="polite" class="mt-5">
+        {% if submitted %}
+          {% include "partials/htmx_result.html" %}
+        {% else %}
+          <p class="text-sm text-[var(--jl-text-subtle)]">The server response will appear here.</p>
+        {% endif %}
+      </div>
+    {% endcall %}
+  </div>
+
+  <p class="mt-8 text-sm text-[var(--jl-text-subtle)]">The demo loads HTMX from a CDN only on this page. The core Jinjalume package does not depend on HTMX.</p>
+  <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
+{% endblock %}

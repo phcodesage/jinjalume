@@ -1,14 +1,54 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Jinjalume{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='dist/jinjalume.css') }}">
   </head>
-  <body class="min-h-screen bg-slate-50 text-slate-900 antialiased">
-    <main class="mx-auto max-w-5xl px-6 py-16 lg:px-8">
+  <body class="min-h-screen bg-[var(--jl-page)] text-[var(--jl-text)] antialiased">
+    <header class="border-b border-[var(--jl-border)] bg-[var(--jl-surface)]">
+      <div class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-4 lg:px-8">
+        <a href="{{ url_for('index') }}" class="font-semibold text-[var(--jl-text)]">Jinjalume</a>
+        <nav class="flex items-center gap-4 text-sm">
+          <a href="{{ url_for('index') }}" class="text-[var(--jl-text-muted)] hover:text-[var(--jl-text)]">Components</a>
+          <a href="{{ url_for('htmx_demo') }}" class="text-[var(--jl-text-muted)] hover:text-[var(--jl-text)]">HTMX demo</a>
+          <button id="theme-toggle" type="button" aria-pressed="false" class="rounded-lg bg-[var(--jl-surface)] px-3 py-2 font-semibold text-[var(--jl-text)] ring-1 ring-inset ring-[var(--jl-border)] hover:bg-[var(--jl-surface-muted)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--jl-focus)]">Use dark mode</button>
+        </nav>
+      </div>
+    </header>
+    <main class="mx-auto max-w-5xl px-6 py-12 lg:px-8">
       {% block content %}{% endblock %}
     </main>
+    <script>
+      (() => {
+        const root = document.documentElement;
+        const toggle = document.getElementById("theme-toggle");
+        let savedTheme = null;
+        try {
+          savedTheme = window.localStorage.getItem("jinjalume-theme");
+        } catch (error) {
+          // Storage may be unavailable in privacy-restricted browsers.
+        }
+
+        const setTheme = (theme) => {
+          const isDark = theme === "dark";
+          root.dataset.theme = isDark ? "dark" : "light";
+          toggle.setAttribute("aria-pressed", String(isDark));
+          toggle.textContent = isDark ? "Use light mode" : "Use dark mode";
+        };
+
+        setTheme(savedTheme === "dark" ? "dark" : "light");
+        toggle.addEventListener("click", () => {
+          const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+          setTheme(nextTheme);
+          try {
+            window.localStorage.setItem("jinjalume-theme", nextTheme);
+          } catch (error) {
+            // The toggle still works for the current page without storage.
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

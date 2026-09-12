@@ -11,3 +11,5 @@ build/
 node_modules/
 demo/static/dist/*.css
 !demo/static/dist/.gitkeep
+playwright-report/
+test-results/

@@ -4,9 +4,11 @@
   "description": "Development-only Tailwind assets for Jinjalume",
   "scripts": {
     "build:css": "tailwindcss -i ./static/src/input.css -o ./demo/static/dist/jinjalume.css --minify",
-    "dev:css": "tailwindcss -i ./static/src/input.css -o ./demo/static/dist/jinjalume.css --watch"
+    "dev:css": "tailwindcss -i ./static/src/input.css -o ./demo/static/dist/jinjalume.css --watch",
+    "test:visual": "playwright test"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/cli": "^4.3.0",
     "tailwindcss": "^4.3.0"
   }

@@ -1,9 +1,9 @@
 {% macro alert(message, variant="info", title=None, class_name="") -%}
   {% set variants = {
-    "info": "border-sky-200 bg-sky-50 text-sky-900",
-    "success": "border-emerald-200 bg-emerald-50 text-emerald-900",
-    "warning": "border-amber-200 bg-amber-50 text-amber-900",
-    "danger": "border-red-200 bg-red-50 text-red-900"
+    "info": "border-[var(--jl-info-border)] bg-[var(--jl-info-surface)] text-[var(--jl-info-text)]",
+    "success": "border-[var(--jl-success-border)] bg-[var(--jl-success-surface)] text-[var(--jl-success-text)]",
+    "warning": "border-[var(--jl-warning-border)] bg-[var(--jl-warning-surface)] text-[var(--jl-warning-text)]",
+    "danger": "border-[var(--jl-danger-border)] bg-[var(--jl-danger-surface)] text-[var(--jl-danger-text)]"
   } %}
   <div role="alert" class="rounded-lg border px-4 py-3 text-sm {{ variants.get(variant, variants["info"]) }} {{ class_name }}">
     {% if title %}<p class="font-semibold">{{ title }}</p>{% endif %}
